@@ -1,21 +1,30 @@
 package senai;
 
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
+import java.util.List;
 
-
-public class Evento {
+public class Evento implements Agendamento {
 	private String nome;
 	private LocalDate data;
 	private Usuario organizador;
-	private Usuario[] participantes;
-	private int posicaoParticipantes = 0;
+	private List<Usuario> participantes;
+//	private int posicaoParticipantes = 0;
 	private String descricao;
+	
+	/**
+	 * Construtor padrão
+	 * @param nome nome do evento
+	 * @param data data do evento
+	 * @param organizador organizador do evento
+	 */
 
 	public Evento(String nome, LocalDate data, Usuario organizador) {
 		this.nome = nome;
 		this.data = data;
 		this.organizador = organizador;
-		this.participantes = new Usuario[10];
+		this.participantes = new ArrayList<Usuario>();
 	}
 
 	public String getNome() {
@@ -30,8 +39,10 @@ public class Evento {
 		return data;
 	}
 
-	public void setData(LocalDate data) {
-		this.data = data;
+	public void setData(String data) {
+		String format = "dd/MM/yyyy";
+		DateTimeFormatter formatter = DateTimeFormatter.ofPattern(format);
+		this.data = LocalDate.parse(data, formatter);
 	}
 
 	public Usuario getOrganizador() {
@@ -51,8 +62,14 @@ public class Evento {
 	}
 
 	public void addParticipante(Usuario participante) {
-		this.participantes[this.posicaoParticipantes] = participante;
-		this.posicaoParticipantes++;
+		this.participantes.add(participante);
+//		this.participantes[this.posicaoParticipantes] = participante;
+//		this.posicaoParticipantes++;
+	}
+
+	@Override
+	public String toString() {
+		return "Evento [nome=" + nome + ", data=" + data + ", organizador=" + organizador + "]";
 	}
 
 	public String listaParticipantes() {
@@ -64,16 +81,14 @@ public class Evento {
 		}
 		return lista;
 	}
-
-	//desafio 7
-	public void removerParticipante(String nomeExcluir) {		
-		for (int i = 0; i < participantes.length; i++) {
-			if (participantes[i].getNome()== nomeExcluir) {
-				for (int j = i; j < participantes.length - 1; j++) {
-					participantes[j] = participantes[j + 1];
-				}
-				break;
-			}
-		}
-	}
 }
+
+// desafio 7
+//	public void removerParticipante(String nomeExcluir) {		
+//		for (int i = 0; i < participantes.length; i++) {
+//			if (participantes[i].getNome()== nomeExcluir) {
+//				for (int j = i; j < participantes.length - 1; j++) {
+//					participantes[j] = participantes[j + 1];
+//				}
+//				break;
+//			}

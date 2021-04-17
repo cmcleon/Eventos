@@ -29,5 +29,12 @@ public class EventoPresencial extends Evento {
 	public void setCapacidadeMaxima(int capacidadeMaxima) {
 		this.capacidadeMaxima = capacidadeMaxima;
 	}
+	
+	@Override
+	public void addParticipante(Usuario participante) {
+		if (this.getCapacidadeMaxima()<= this.capacidadeMaxima) {
+			super.addParticipante(participante);
+		}
+	}
 
 }
