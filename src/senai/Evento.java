@@ -2,6 +2,7 @@ package senai;
 
 import java.time.LocalDate;
 
+
 public class Evento {
 	private String nome;
 	private LocalDate data;
@@ -9,7 +10,6 @@ public class Evento {
 	private Usuario[] participantes;
 	private int posicaoParticipantes = 0;
 	private String descricao;
-
 
 	public Evento(String nome, LocalDate data, Usuario organizador) {
 		this.nome = nome;
@@ -42,11 +42,6 @@ public class Evento {
 		this.organizador = organizador;
 	}
 
-	public void addParticipante(Usuario participante) {
-		this.participantes[this.posicaoParticipantes] = participante;
-		this.posicaoParticipantes++;
-	}
-
 	public String getDescricao() {
 		return descricao;
 	}
@@ -54,4 +49,31 @@ public class Evento {
 	public void setDescricao(String descricao) {
 		this.descricao = descricao;
 	}
+
+	public void addParticipante(Usuario participante) {
+		this.participantes[this.posicaoParticipantes] = participante;
+		this.posicaoParticipantes++;
 	}
+
+	public String listaParticipantes() {
+		String lista = "";
+		for (Usuario participante : participantes) {
+			if (participante != null) {
+				lista += participante.getNome() + "\n";
+			}
+		}
+		return lista;
+	}
+
+	//desafio 7
+	public void removerParticipante(String nomeExcluir) {		
+		for (int i = 0; i < participantes.length; i++) {
+			if (participantes[i].getNome()== nomeExcluir) {
+				for (int j = i; j < participantes.length - 1; j++) {
+					participantes[j] = participantes[j + 1];
+				}
+				break;
+			}
+		}
+	}
+}
