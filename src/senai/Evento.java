@@ -12,11 +12,12 @@ public class Evento implements Agendamento {
 	private List<Usuario> participantes;
 //	private int posicaoParticipantes = 0;
 	private String descricao;
-	
+
 	/**
 	 * Construtor padrão
-	 * @param nome nome do evento
-	 * @param data data do evento
+	 * 
+	 * @param nome        nome do evento
+	 * @param data        data do evento
 	 * @param organizador organizador do evento
 	 */
 
@@ -78,9 +79,15 @@ public class Evento implements Agendamento {
 			if (participante != null) {
 				lista += participante.getNome() + "\n";
 			}
+		return lista;
 		}
 		return lista;
 	}
+
+	public int getQuantidadeParticipantes() {
+		return this.participantes.size();
+	}
+
 }
 
 // desafio 7
